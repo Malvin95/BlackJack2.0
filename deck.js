@@ -54,7 +54,7 @@ class Deck {
 
     returnCard(self, card, posiiton){
         try{
-            if((self.limit != null && (self.cards.length() < self.limit) || self.limit == null){
+            if((self.limit != null && (self.cards.length() < self.limit) || self.limit == null)){
                 if(position == "top"){
                     self.cards.unshift(card);
                 }

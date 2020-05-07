@@ -1,28 +1,30 @@
-import { Card } from './card.js'
+const Card = require('./card');
 
 const suitArr = ['spades','clubs','hearts','diamonds'];
 
-class Deck {
+var cards = []
+var limit = null
+var deck_type = deck_type
 
-    constructor(self, deck_type, limit) {
+module.exports = class Deck {
+
+    constructor(deck_type, limit) {
         
-        self.cards = []
-        self.limit = null
-        self.deck_type = deck.type
+        this.cards = []
+        this.limit = null
+        this.deck_type = deck_type
 
-        try{
-            if(deck_type == "pack"){
-                for(var s = 0; s < suitArr.length; s++){
-                    for(var n = 1; n <= 13; n++){
-                        self.cards.push(Card(s,n));
-                    }
+        if(deck_type == "pack"){
+            for(var s = 0; s < suitArr.length; s++){
+                for(var n = 1; n <= 13; n++){
+                    this.cards.push(new Card(suitArr[s],n));
                 }
             }
-            else if(deck_type == "hand"){
-                self.limit = limit;
-            }
-        } 
-        catch(err) {
+        }
+        else if(deck_type == "hand"){
+            this.limit = limit;
+        }
+        else{
             console.log("This is neither a deck or hand.")
         }
 
@@ -32,59 +34,60 @@ class Deck {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
 
-    shuffle(self) {
-        for(var i = 0; i < self.cards.length(); i++){
-            rVal = this.getRndInteger(0, i);
-            self.cards[i], self.cards(rVal) = self.cards[rVal], self.cards[i];
+    shuffle() {
+        for(var i = 0; i < this.cards.length; i++){
+            var rVal = this.getRndInteger(0, i);
+            this.cards[i], this.cards[rVal] = this.cards[rVal], this.cards[i];
         }
     }
 
-    dealCard(self, position) {
+    dealCard(position) {
         if(position == "top"){
-            return self.cards.shift();
+            return this.cards.shift();
         }
         else if(position == "bottom"){
-            return self.cards.pop();
+            return this.cards.pop();
         }
         else{
-            var pos = this.getRndInteger(0, self.cards.length());
-            return self.cards.splice(pos);
+            var pos = this.getRndInteger(0, this.cards.length());
+            return this.cards.splice(pos);
         }
     }
 
-    returnCard(self, card, posiiton){
-        try{
-            if((self.limit != null && (self.cards.length() < self.limit) || self.limit == null)){
-                if(position == "top"){
-                    self.cards.unshift(card);
-                }
-                else if(position == "bottom"){
-                    self.cards.push(card);
-                }
-                else{
-                    var pos = this.getRndInteger(0, self.cards.length());
-                    self.card.splice(pos, 0, card);
-                }
+    returnCard(card, posiiton){
+        if((this.limit != null && (this.cards.length() < this.limit) || this.limit == null)) {
+            if(position == "top"){
+                this.cards.unshift(card);
+            }
+            else if(position == "bottom"){
+                this.cards.push(card);
+            }
+            else{
+                var pos = this.getRndInteger(0, this.cards.length());
+                this.cards.splice(pos, 0, card);
             }
         }
-        catch(err){
-            console.log("The Deck limit has been Exceeded.");
+        else
+        {
+                console.log("The Deck limit has been Exceeded.");
         }
     }
 
-    show(self){
-        if(self.cards.length() > 0){
-            for(var i = 0; i < self.cards.length(); i++){
-                if(self.cards[i].number < 1 && self.cards[i].number <= 10){
-                    console.log(self.cards[i].number + " of " + self.cards[i].suit);
+    show(){
+        var cardLength = this.cards.length;
+
+        if(cardLength > 0){
+            for(var i = 0; i < cardLength; i++){
+                if((this.cards[i].number < 1) && (this.cards[i].number <= 10)){
+                    console.log(this.cards[i].number + " of " + this.cards[i].suit);
                 }
                 else {
-                    console.log(self.cards[i].face + " of " + self.cards[i].suit);
+                    console.log(this.cards[i].face + " of " + this.cards[i].suit);
                 }
             }
         }
         else{
-            console.log("There are no cards in the deck of type " + self.deck_type);
+            console.log("There are no cards in the deck of")
         }
     }
 

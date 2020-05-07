@@ -1,42 +1,41 @@
-class Card {
+module.exports = class Card {
 
-    constructor(self, suit, number) {
-        try{
-            if(suit.toLowerCase() == ('hearts'||'diamonds'||'spades'||'clubs')){
-                self.suit = suit;
-            }
+    constructor(suit, number) {
+
+        var lowerSuit = suit.toLowerCase();
+
+        if(lowerSuit == 'hearts'||'diamonds'||'spades'||'clubs') {
+            this.suit = lowerSuit;
         }
-        catch(err){
+        else {
             console.log("The suit provided is not a suit.")
         }
-
-        try{
-            if(number >= 0 && number <= 13){
-                self.number = number;
-                
-                if(number > 10){
-                    self.value = [10]
-                    if(number == 11){
-                        self.face = "Jack"
-                    }
-                    else if(number == 12){
-                        self.face = "Queen"
-                    }
-                    else if(number == 13){
-                        self.face == "King"
-                    }
+        
+        if(number >= 0 && number <= 13) {
+            this.number = number;
+            
+            if(number > 10) {
+                this.value = [10]
+                if(number == 11){
+                    this.face = "Jack"
                 }
-                else if(number == 1) {
-                    self.value = [1,11]
-                    self.face == "Ace"
+                else if(number == 12){
+                    this.face = "Queen"
                 }
-                else{
-                    self.value = [number]
+                else if(number == 13){
+                    this.face == "King"
                 }
             }
+            else if(number == 1) {
+                this.value = [1,11]
+                this.face == "Ace"
+            }
+            else{
+                this.value = [number]
+            }
         }
-        catch(err){
-            console.log("The Number is out of bounds.")
+        else {
+            console.log("The Number is out of bounds.");
         }
     }
 

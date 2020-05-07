@@ -26,7 +26,7 @@ module.exports = class Card {
                     this.face == "King"
                 }
             }
-            else if(number == 1) {
+            else if(number == 1){
                 this.value = [1,11]
                 this.face == "Ace"
             }

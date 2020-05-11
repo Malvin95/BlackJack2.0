@@ -11,7 +11,7 @@ module.exports = class Card {
             console.log("The suit provided is not a suit.")
         }
         
-        if(number >= 0 && number <= 13) {
+        if((number >= 0) && (number <= 13)) {
             this.number = number;
             
             if(number > 10) {
@@ -23,12 +23,12 @@ module.exports = class Card {
                     this.face = "Queen"
                 }
                 else if(number == 13){
-                    this.face == "King"
+                    this.face = "King"
                 }
             }
             else if(number == 1){
                 this.value = [1,11]
-                this.face == "Ace"
+                this.face = "Ace"
             }
             else{
                 this.value = [number]

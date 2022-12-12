@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Malvin95/BlackJack2.0#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   }
 }
